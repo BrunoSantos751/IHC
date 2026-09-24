@@ -1,13 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView, Image } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView, Image, Platform, useWindowDimensions } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { ChevronLeft, Share, MapPin, Circle, User as UserIcon } from 'lucide-react-native';
+import { WebLayout } from '../../components/WebLayout';
+import { StatusBadge } from '../../components/StatusBadge';
+import { Button } from '../../components/Button';
 import { Colors } from '../../constants/Colors';
 import { StatusBar } from 'expo-status-bar';
 
 export default function DetailsScreen() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
+  const { width } = useWindowDimensions();
+  const isWebLarge = Platform.OS === 'web' && width > 768;
 
   // Mock data based on ID
   const isFound = id === '2'; // If ID is 2, it's the "Encontrado" screen
@@ -34,40 +39,22 @@ export default function DetailsScreen() {
     imageUrl: isFound ? 'https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800&auto=format&fit=crop' : 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=800&auto=format&fit=crop',
   };
 
-  return (
-    <SafeAreaView style={[styles.safeArea, { backgroundColor: bgColor }]}>
-      <StatusBar style="dark" />
-      
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.iconButton} onPress={() => router.back()}>
-          <ChevronLeft size={20} color="#1F2937" />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Detalhes do Objeto</Text>
-        <TouchableOpacity style={styles.iconButton}>
-          <Share size={20} color="#1F2937" />
-        </TouchableOpacity>
-      </View>
 
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        
-        {/* Image */}
-        <Image 
-          source={{ uri: item.imageUrl }} 
-          style={styles.image}
-        />
-
+  const detailsContent = (
+    <>
         {/* Badges */}
         <View style={styles.badgeRow}>
-          <View style={[styles.statusBadge, { backgroundColor: badgeBg }]}>
-            <Text style={[styles.statusBadgeText, { color: badgeText }]}>{item.status}</Text>
-          </View>
+          <StatusBadge 
+            status={item.status} 
+            style={[styles.statusBadge, { backgroundColor: badgeBg }]} 
+            textStyle={[styles.statusBadgeText, { color: badgeText }]} 
+          />
           <Text style={styles.categoryText}>{item.category}</Text>
         </View>
 
         {/* Title & Description */}
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.description}>{item.description}</Text>
+        <Text style={[styles.title, isWebLarge && styles.webTitle]}>{item.title}</Text>
+        <Text style={[styles.description, isWebLarge && styles.webDescription]}>{item.description}</Text>
 
         {/* Info Box */}
         <View style={styles.infoBox}>
@@ -104,17 +91,76 @@ export default function DetailsScreen() {
             </>
           )}
         </View>
+        
+        {/* Footer Action */}
+        <View style={styles.footer}>
+          <Button
+            title={isFound ? 'Este objeto é meu' : 'Eu encontrei este objeto'}
+            style={[styles.actionButton, { backgroundColor: buttonColor }]}
+            textStyle={styles.actionButtonText}
+            onPress={() => {}}
+            activeOpacity={0.9}
+          />
+        </View>
+    </>
+  );
 
-      </ScrollView>
+  if (isWebLarge) {
+    return (
+      <WebLayout>
+        <View style={styles.webContainer}>
+          <View style={styles.webHeader}>
+            <TouchableOpacity style={styles.webBackButton} onPress={() => router.back()}>
+              <ChevronLeft size={20} color="#1F2937" />
+              <Text style={styles.webBackText}>Voltar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.webShareButton}>
+              <Share size={20} color="#1F2937" />
+              <Text style={styles.webShareText}>Compartilhar</Text>
+            </TouchableOpacity>
+          </View>
 
-      {/* Footer Action */}
-      <View style={styles.footer}>
-        <TouchableOpacity style={[styles.actionButton, { backgroundColor: buttonColor }]} activeOpacity={0.9}>
-          <Text style={styles.actionButtonText}>
-            {isFound ? 'Este objeto é meu' : 'Eu encontrei este objeto'}
-          </Text>
+          <View style={styles.webContentRow}>
+            <View style={styles.webImageCol}>
+              <Image 
+                source={{ uri: item.imageUrl }} 
+                style={styles.webImage}
+              />
+            </View>
+            <View style={styles.webDetailsCol}>
+              {detailsContent}
+            </View>
+          </View>
+        </View>
+      </WebLayout>
+    );
+  }
+
+  return (
+    <SafeAreaView style={[styles.safeArea, { backgroundColor: bgColor }]}>
+      <StatusBar style="dark" />
+      
+      {/* Header */}
+      <View style={styles.header}>
+        <TouchableOpacity style={styles.iconButton} onPress={() => router.back()}>
+          <ChevronLeft size={20} color="#1F2937" />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Detalhes do Objeto</Text>
+        <TouchableOpacity style={styles.iconButton}>
+          <Share size={20} color="#1F2937" />
         </TouchableOpacity>
       </View>
+
+      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+        
+        {/* Image */}
+        <Image 
+          source={{ uri: item.imageUrl }} 
+          style={styles.image}
+        />
+
+        {detailsContent}
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -246,10 +292,73 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   actionButtonText: {
     fontFamily: 'Figtree-Bold',
     fontWeight: '700',
     fontSize: 15,
     color: '#FFFFFF',
   },
+  webContainer: {
+    width: '100%',
+    padding: 24,
+  },
+  webHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 40,
+  },
+  webBackButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  webBackText: {
+    fontFamily: 'Figtree-Medium',
+    fontSize: 16,
+    color: '#1F2937',
+  },
+  webShareButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 8,
+  },
+  webShareText: {
+    fontFamily: 'Figtree-Medium',
+    fontSize: 14,
+    color: '#1F2937',
+  },
+  webContentRow: {
+    flexDirection: 'row',
+    gap: 48,
+    alignItems: 'flex-start',
+  },
+  webImageCol: {
+    flex: 1,
+  },
+  webImage: {
+    width: '100%',
+    height: 600,
+    borderRadius: 24,
+    backgroundColor: '#E5E7EB',
+  },
+  webDetailsCol: {
+    flex: 1,
+    maxWidth: 600,
+  },
+  webTitle: {
+    fontSize: 32,
+    lineHeight: 40,
+  },
+  webDescription: {
+    fontSize: 16,
+    lineHeight: 24,
+  },
 });
+

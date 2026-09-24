@@ -1,16 +1,17 @@
 import React from 'react';
-import { View, Text, StyleSheet, ViewStyle } from 'react-native';
+import { View, Text, StyleSheet, ViewStyle, TextStyle, StyleProp } from 'react-native';
 import { Colors } from '../constants/Colors';
 
-type TagType = 'lost' | 'found' | 'category';
+export type TagType = 'lost' | 'found' | 'category';
 
-interface TagProps {
+export interface TagProps {
   label: string;
   type?: TagType;
-  style?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
 }
 
-export function Tag({ label, type = 'category', style }: TagProps) {
+export function Tag({ label, type = 'category', style, textStyle }: TagProps) {
   const getContainerStyle = () => {
     switch (type) {
       case 'lost':
@@ -26,12 +27,12 @@ export function Tag({ label, type = 'category', style }: TagProps) {
   const getTextStyle = () => {
     switch (type) {
       case 'lost':
-        return [styles.text, styles.lostText];
+        return [styles.text, styles.lostText, textStyle];
       case 'found':
-        return [styles.text, styles.foundText];
+        return [styles.text, styles.foundText, textStyle];
       case 'category':
       default:
-        return [styles.categoryText];
+        return [styles.categoryText, textStyle];
     }
   };
 

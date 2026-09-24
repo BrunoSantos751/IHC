@@ -1,4 +1,4 @@
-# #  Sistema de Achados e Perdidos
+# # São Longuinho - Sistema de Achados e Perdidos
 
 Projeto desenvolvido para a disciplina de **IHC (Interação Humano-Computador)**.
 

@@ -1,0 +1,126 @@
+import { StyleSheet } from 'react-native';
+
+export const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#FBF8F1',
+  },
+  header: {
+    paddingHorizontal: 24,
+    paddingTop: 24,
+    paddingBottom: 8,
+  },
+  headerTitle: {
+    fontFamily: 'Figtree-ExtraBold',
+    fontWeight: '800',
+    fontSize: 28,
+    color: '#1F2937',
+  },
+  searchContainer: {
+    paddingHorizontal: 24,
+    paddingBottom: 24,
+  },
+  searchBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    gap: 12,
+  },
+  searchInput: {
+    flex: 1,
+    fontFamily: 'Figtree-Regular',
+    fontWeight: '400',
+    fontSize: 14,
+    color: '#1F2937',
+  },
+  scrollContent: {
+    paddingBottom: 40,
+  },
+  section: {
+    paddingHorizontal: 24,
+    marginBottom: 24,
+  },
+  sectionTitle: {
+    fontFamily: 'Figtree-Bold',
+    fontWeight: '700',
+    fontSize: 16,
+    color: '#1F2937',
+    marginBottom: 12,
+  },
+  chipsRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+  },
+  recentChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+    borderRadius: 20,
+    paddingVertical: 8,
+    paddingLeft: 14,
+    paddingRight: 12,
+    gap: 6,
+  },
+  chipText: {
+    fontFamily: 'Figtree-Medium',
+    fontWeight: '500',
+    fontSize: 13,
+    color: '#4B5563',
+  },
+  categoriesGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 12,
+  },
+  categoryCard: {
+    width: '47%',
+    padding: 14,
+    borderRadius: 16,
+    borderWidth: 1,
+    gap: 8,
+  },
+  iconWrap: {
+    width: 34,
+    height: 34,
+    borderRadius: 12,
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  catInfo: {
+    gap: 2,
+  },
+  categoryName: {
+    fontFamily: 'Figtree-Bold',
+    fontWeight: '700',
+    fontSize: 14,
+    color: '#1F2937',
+  },
+  categoryCount: {
+    fontFamily: 'Figtree-Regular',
+    fontWeight: '400',
+    fontSize: 11,
+    color: '#4B5563',
+  },
+  webContainer: {
+    maxWidth: 1040,
+    width: '100%',
+    alignSelf: 'center',
+    paddingHorizontal: 32,
+    paddingTop: 36,
+    paddingBottom: 48,
+  },
+  webCategoryCard: {
+    width: '18%',
+    minWidth: 170,
+    flexGrow: 1,
+  },
+});

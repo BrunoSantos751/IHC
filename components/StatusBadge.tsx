@@ -1,19 +1,22 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, StyleProp, ViewStyle, TextStyle } from 'react-native';
 import { Colors } from '../constants/Colors';
 
-interface StatusBadgeProps {
-  status: 'lost' | 'found';
-  style?: any;
+export interface StatusBadgeProps {
+  status: 'lost' | 'found' | 'PERDIDO' | 'ENCONTRADO' | string;
+  style?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
+  label?: string;
 }
 
-export function StatusBadge({ status, style }: StatusBadgeProps) {
-  const isLost = status === 'lost';
+export function StatusBadge({ status, style, textStyle, label }: StatusBadgeProps) {
+  const normalized = String(status || '').toLowerCase();
+  const isLost = normalized === 'lost' || normalized === 'perdido';
   
   return (
     <View style={[styles.container, isLost ? styles.lostBg : styles.foundBg, style]}>
-      <Text style={[styles.text, isLost ? styles.lostText : styles.foundText]}>
-        {isLost ? 'PERDIDO' : 'ENCONTRADO'}
+      <Text style={[styles.text, isLost ? styles.lostText : styles.foundText, textStyle]}>
+        {label || (isLost ? 'PERDIDO' : 'ENCONTRADO')}
       </Text>
     </View>
   );

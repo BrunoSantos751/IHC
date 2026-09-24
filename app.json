@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "achados",
+    "name": "São Longuinho",
     "slug": "achados",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -22,7 +22,13 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/favicon.png",
+      "name": "São Longuinho",
+      "shortName": "São Longuinho",
+      "themeColor": "#E6F4FE",
+      "backgroundColor": "#ffffff",
+      "display": "standalone",
+      "orientation": "portrait"
     },
     "plugins": [
       "expo-router",

@@ -1,32 +1,29 @@
 import React from 'react';
-import { View } from 'react-native';
-import { Tabs } from 'expo-router';
+import { View, useWindowDimensions, Platform } from 'react-native';
+import { Tabs, usePathname, Slot } from 'expo-router';
 import { Home, Search, Plus, Bell, User } from 'lucide-react-native';
 import { Colors } from '../../constants/Colors';
+import { WebNavbar } from '../../components/WebLayout';
+import { styles } from '../../styles/tabs/layout.styles';
 
 export default function TabLayout() {
+  const { width } = useWindowDimensions();
+  const isWebLarge = Platform.OS === 'web' && width > 768;
+  const pathname = usePathname();
+  const isAuthRoute = pathname.includes('login') || pathname.includes('register');
+
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors.primary,
-        tabBarInactiveTintColor: '#4B5563',
-        tabBarStyle: {
-          backgroundColor: '#FFFFFF',
-          borderTopWidth: 1,
-          borderTopColor: '#E5E7EB',
-          height: 72,
-          paddingBottom: 8,
-          paddingTop: 8,
-          paddingHorizontal: 24,
-        },
-        tabBarLabelStyle: {
-          fontFamily: 'Figtree-Medium',
-          fontSize: 10,
-          fontWeight: '500',
-          marginTop: 4,
-        },
-        headerShown: false,
-      }}>
+    <View style={styles.container}>
+      {isWebLarge && !isAuthRoute && <WebNavbar />}
+      <View style={styles.tabContentWrapper}>
+        <Tabs
+          screenOptions={{
+            tabBarActiveTintColor: Colors.primary,
+            tabBarInactiveTintColor: '#4B5563',
+            tabBarStyle: (isWebLarge || isAuthRoute) ? { display: 'none' } : styles.tabBar,
+            tabBarLabelStyle: styles.tabBarLabel,
+            headerShown: false,
+          }}>
       <Tabs.Screen
         name="index"
         options={{
@@ -47,16 +44,7 @@ export default function TabLayout() {
           title: '',
           tabBarLabel: () => null,
           tabBarIcon: () => (
-            <View style={{
-              width: 48,
-              height: 48,
-              borderRadius: 24,
-              backgroundColor: Colors.primary,
-              borderWidth: 1,
-              borderColor: '#E5E7EB',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
+            <View style={styles.addButtonContainer}>
               <Plus size={22} color="#FFFFFF" />
             </View>
           ),
@@ -76,7 +64,22 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <User size={22} color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="login"
+        options={{
+          href: null,
+          tabBarStyle: { display: 'none' },
+        }}
+      />
+      <Tabs.Screen
+        name="register"
+        options={{
+          href: null,
+          tabBarStyle: { display: 'none' },
+        }}
+      />
     </Tabs>
+      </View>
+    </View>
   );
 }
-

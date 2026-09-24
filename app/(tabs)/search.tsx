@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, Platform, useWindowDimensions } from 'react-native';
 import { Search, X, Laptop, Glasses, FileText, Key, MoreHorizontal } from 'lucide-react-native';
 import { Colors } from '../../constants/Colors';
+import { InputField } from '../../components/InputField';
 import { StatusBar } from 'expo-status-bar';
+import { styles } from '../../styles/tabs/search.styles';
 
 const RECENT_SEARCHES = ['iPhone', 'Carteira', 'Chaves', 'Mochila'];
 
@@ -15,8 +17,11 @@ const POPULAR_CATEGORIES = [
 ];
 
 export default function SearchScreen() {
+  const { width } = useWindowDimensions();
+  const isWebLarge = Platform.OS === 'web' && width > 768;
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={[styles.safeArea, isWebLarge && { backgroundColor: 'transparent' }]}>
+      <View style={[isWebLarge && styles.webContainer]}>
       <StatusBar style="dark" />
       
       {/* Header */}
@@ -26,14 +31,16 @@ export default function SearchScreen() {
 
       {/* Search Bar */}
       <View style={styles.searchContainer}>
-        <View style={styles.searchBar}>
-          <Search size={18} color="#9CA3AF" />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Buscar objetos perdidos ou achados..."
-            placeholderTextColor="#9CA3AF"
-          />
-        </View>
+        <InputField
+          Icon={Search}
+          iconSize={18}
+          iconColor="#9CA3AF"
+          inputContainerStyle={styles.searchBar}
+          inputStyle={styles.searchInput}
+          containerStyle={{ marginBottom: 0 }}
+          placeholder="Buscar objetos perdidos ou achados..."
+          placeholderTextColor="#9CA3AF"
+        />
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
@@ -60,7 +67,11 @@ export default function SearchScreen() {
               return (
                 <TouchableOpacity 
                   key={cat.id} 
-                  style={[styles.categoryCard, { backgroundColor: cat.bg, borderColor: cat.border }]}
+                  style={[
+                    styles.categoryCard, 
+                    isWebLarge && styles.webCategoryCard,
+                    { backgroundColor: cat.bg, borderColor: cat.border }
+                  ]}
                 >
                   <View style={styles.iconWrap}>
                     <CatIcon size={18} color="#1F2937" />
@@ -76,118 +87,7 @@ export default function SearchScreen() {
         </View>
 
       </ScrollView>
+          </View>
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: '#FBF8F1',
-  },
-  header: {
-    paddingHorizontal: 24,
-    paddingTop: 24,
-    paddingBottom: 8,
-  },
-  headerTitle: {
-    fontFamily: 'Figtree-ExtraBold',
-    fontWeight: '800',
-    fontSize: 28,
-    color: '#1F2937',
-  },
-  searchContainer: {
-    paddingHorizontal: 24,
-    paddingBottom: 24,
-  },
-  searchBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    gap: 12,
-  },
-  searchInput: {
-    flex: 1,
-    fontFamily: 'Figtree-Regular',
-    fontWeight: '400',
-    fontSize: 14,
-    color: '#1F2937',
-  },
-  scrollContent: {
-    paddingBottom: 40,
-  },
-  section: {
-    paddingHorizontal: 24,
-    marginBottom: 24,
-  },
-  sectionTitle: {
-    fontFamily: 'Figtree-Bold',
-    fontWeight: '700',
-    fontSize: 16,
-    color: '#1F2937',
-    marginBottom: 12,
-  },
-  chipsRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-  },
-  recentChip: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-    borderRadius: 20,
-    paddingVertical: 8,
-    paddingLeft: 14,
-    paddingRight: 12,
-    gap: 6,
-  },
-  chipText: {
-    fontFamily: 'Figtree-Medium',
-    fontWeight: '500',
-    fontSize: 13,
-    color: '#4B5563',
-  },
-  categoriesGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 12,
-  },
-  categoryCard: {
-    width: '47%',
-    padding: 14,
-    borderRadius: 16,
-    borderWidth: 1,
-    gap: 8,
-  },
-  iconWrap: {
-    width: 34,
-    height: 34,
-    borderRadius: 12,
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  catInfo: {
-    gap: 2,
-  },
-  categoryName: {
-    fontFamily: 'Figtree-Bold',
-    fontWeight: '700',
-    fontSize: 14,
-    color: '#1F2937',
-  },
-  categoryCount: {
-    fontFamily: 'Figtree-Regular',
-    fontWeight: '400',
-    fontSize: 11,
-    color: '#4B5563',
-  },
-});

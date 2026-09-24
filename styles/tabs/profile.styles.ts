@@ -1,0 +1,223 @@
+import { StyleSheet } from 'react-native';
+
+export const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#FAF9F5',
+  },
+  webRoot: {
+    backgroundColor: 'transparent',
+  },
+  scrollContent: {
+    paddingHorizontal: 24,
+    paddingTop: 32,
+    paddingBottom: 40,
+  },
+  webRowContainer: {
+    flexDirection: 'row',
+    gap: 32,
+    alignItems: 'flex-start',
+    width: '100%',
+  },
+  webLeftCol: {
+    width: 400,
+    flexShrink: 0,
+    gap: 24,
+  },
+  webRightCol: {
+    flex: 1,
+  },
+  webProfileHeader: {
+    backgroundColor: '#FFFFFF',
+    padding: 32,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+    marginBottom: 0,
+  },
+  profileHeader: {
+    alignItems: 'center',
+    marginBottom: 24,
+  },
+  avatarContainer: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: '#EEF2FF',
+    borderWidth: 2,
+    borderColor: '#3D6DD7',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  avatarText: {
+    fontFamily: 'Figtree-ExtraBold',
+    fontSize: 28,
+    color: '#3D6DD7',
+  },
+  userName: {
+    fontFamily: 'Figtree-ExtraBold',
+    fontSize: 22,
+    color: '#1F2937',
+    marginBottom: 4,
+  },
+  userEmail: {
+    fontFamily: 'Figtree-Regular',
+    fontSize: 14,
+    color: '#4B5563',
+    marginBottom: 8,
+  },
+  badgeContainer: {
+    backgroundColor: '#EEF2FF',
+    borderWidth: 1,
+    borderColor: '#DDE3FF',
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 12,
+  },
+  badgeText: {
+    fontFamily: 'Figtree-Medium',
+    fontSize: 11,
+    color: '#3D6DD7',
+  },
+  statsContainer: {
+    flexDirection: 'row',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+    paddingVertical: 16,
+    marginBottom: 32,
+  },
+  statBox: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  statNumber: {
+    fontFamily: 'Figtree-ExtraBold',
+    fontSize: 20,
+    marginBottom: 4,
+  },
+  statLabel: {
+    fontFamily: 'Figtree-Medium',
+    fontSize: 11,
+    color: '#4B5563',
+  },
+  statDivider: {
+    width: 1,
+    backgroundColor: '#E5E7EB',
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  sectionTitle: {
+    fontFamily: 'Figtree-Bold',
+    fontSize: 16,
+    color: '#1F2937',
+  },
+  verTodosText: {
+    fontFamily: 'Figtree-Bold',
+    fontSize: 13,
+    color: '#3D6DD7',
+  },
+  objectCard: {
+    flexDirection: 'row',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+    padding: 12,
+    marginBottom: 32,
+    gap: 12,
+    alignItems: 'center',
+  },
+  objectImage: {
+    width: 64,
+    height: 64,
+    borderRadius: 12,
+  },
+  objectInfo: {
+    flex: 1,
+  },
+  objectBadgeRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  lostBadge: {
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 4,
+  },
+  lostBadgeText: {
+    fontFamily: 'Figtree-Bold',
+    fontSize: 9,
+  },
+  categoryText: {
+    fontFamily: 'Figtree-Medium',
+    fontSize: 10,
+    color: '#9CA3AF',
+  },
+  objectTitle: {
+    fontFamily: 'Figtree-Bold',
+    fontSize: 14,
+    color: '#1F2937',
+    marginBottom: 6,
+  },
+  locationRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
+  locationText: {
+    fontFamily: 'Figtree-Regular',
+    fontSize: 12,
+    color: '#4B5563',
+  },
+  menuCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+    marginBottom: 16,
+    overflow: 'hidden',
+  },
+  menuItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 16,
+  },
+  menuIcon: {
+    marginRight: 16,
+  },
+  menuItemText: {
+    flex: 1,
+    fontFamily: 'Figtree-Bold',
+    fontSize: 14,
+    color: '#1F2937',
+  },
+  menuDivider: {
+    height: 1,
+    backgroundColor: '#F3F4F6',
+    marginLeft: 52,
+  },
+  logoutCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+    padding: 16,
+    width: '100%',
+  },
+  logoutText: {
+    fontFamily: 'Figtree-Bold',
+    fontSize: 14,
+    color: '#EF4444',
+  },
+});

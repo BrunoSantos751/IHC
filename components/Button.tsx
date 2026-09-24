@@ -1,17 +1,32 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle, ActivityIndicator } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle, ActivityIndicator, StyleProp } from 'react-native';
 import { Colors } from '../constants/Colors';
 
-interface ButtonProps {
-  title: string;
+export interface ButtonProps {
+  title?: string;
+  children?: React.ReactNode;
   onPress: () => void;
-  style?: ViewStyle;
-  textStyle?: TextStyle;
+  style?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
   type?: 'primary' | 'outline' | 'secondary';
   loading?: boolean;
+  disabled?: boolean;
+  activeOpacity?: number;
+  icon?: React.ReactNode;
 }
 
-export function Button({ title, onPress, style, textStyle, type = 'primary', loading = false }: ButtonProps) {
+export function Button({ 
+  title, 
+  children,
+  onPress, 
+  style, 
+  textStyle, 
+  type = 'primary', 
+  loading = false,
+  disabled = false,
+  activeOpacity = 0.8,
+  icon,
+}: ButtonProps) {
   const getContainerStyle = () => {
     switch (type) {
       case 'outline':
@@ -39,13 +54,18 @@ export function Button({ title, onPress, style, textStyle, type = 'primary', loa
     <TouchableOpacity
       style={getContainerStyle()}
       onPress={onPress}
-      activeOpacity={0.8}
-      disabled={loading}
+      activeOpacity={activeOpacity}
+      disabled={loading || disabled}
     >
       {loading ? (
         <ActivityIndicator color={type === 'outline' ? Colors.primary : Colors.white} />
+      ) : children ? (
+        children
       ) : (
-        <Text style={getTextStyle()}>{title}</Text>
+        <React.Fragment>
+          {icon}
+          {title ? <Text style={getTextStyle()}>{title}</Text> : null}
+        </React.Fragment>
       )}
     </TouchableOpacity>
   );

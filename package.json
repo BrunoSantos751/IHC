@@ -1,5 +1,5 @@
 {
-  "name": "achados",
+  "name": "sao-longuinho",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "dependencies": {
@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@types/react": "~19.2.2",
+    "@types/react-native": "^0.72.8",
     "typescript": "~6.0.3"
   },
   "scripts": {

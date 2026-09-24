@@ -52,15 +52,26 @@ export default function RootLayout() {
   return <RootLayoutNav />;
 }
 
+import { View, StyleSheet, useWindowDimensions, Platform } from 'react-native';
+
 function RootLayoutNav() {
   return (
     <ThemeProvider value={DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="details/[id]" options={{ presentation: 'modal', headerShown: false }} />
-        <Stack.Screen name="register" options={{ presentation: 'modal', headerShown: false }} />
-      </Stack>
+      <View style={styles.webRoot}>
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="details/[id]" options={{ presentation: 'modal', headerShown: false }} />
+          <Stack.Screen name="register" options={{ presentation: 'modal', headerShown: false }} />
+        </Stack>
+      </View>
     </ThemeProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  webRoot: {
+    flex: 1,
+    backgroundColor: '#FAF9F5', // Figma bg color
+  }
+});
