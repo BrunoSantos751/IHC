@@ -19,7 +19,7 @@ Atualmente, quando um aluno encontra um objeto, pode ser difícil localizar o pr
 ###  Tecnologias
 
 * Figma
-* UX/UI Design
+* UX/UI Design.
 
 ---
 
