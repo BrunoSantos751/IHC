@@ -4,7 +4,6 @@ import { ChevronRight, User, Bell, Shield, Info, LogOut, MapPin } from 'lucide-r
 import { useRouter } from 'expo-router';
 import { Colors } from '../../constants/Colors';
 import { StatusBadge } from '../../components/StatusBadge';
-import { Button } from '../../components/Button';
 import { StatusBar } from 'expo-status-bar';
 import { styles } from '../../styles/tabs/profile.styles';
 
@@ -18,7 +17,7 @@ export default function ProfileScreen() {
   };
 
   const leftColumn = (
-    <View style={isWebLarge ? styles.webLeftCol : {}}>
+    <View style={isWebLarge ? styles.webLeftCol : undefined}>
       {/* Header Profile Info */}
       <View style={[styles.profileHeader, isWebLarge && styles.webProfileHeader]}>
         <View style={styles.avatarContainer}>
@@ -32,7 +31,7 @@ export default function ProfileScreen() {
       </View>
 
       {/* Stats Row */}
-      <View style={styles.statsContainer}>
+      <View style={[styles.statsContainer, isWebLarge && styles.webStatsContainer]}>
         <View style={styles.statBox}>
           <Text style={[styles.statNumber, { color: '#1F2937' }]}>3</Text>
           <Text style={styles.statLabel}>POSTADOS</Text>
@@ -52,7 +51,7 @@ export default function ProfileScreen() {
   );
 
   const rightColumn = (
-    <View style={isWebLarge ? styles.webRightCol : {}}>
+    <View style={isWebLarge ? styles.webRightCol : undefined}>
       {/* Meus Objetos */}
       <View style={styles.sectionHeader}>
         <Text style={styles.sectionTitle}>Meus Objetos publicados</Text>
@@ -61,7 +60,11 @@ export default function ProfileScreen() {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={styles.objectCard}>
+      <TouchableOpacity 
+        style={styles.objectCard}
+        onPress={() => router.push('/details/1')}
+        activeOpacity={0.8}
+      >
         <Image 
           source={{ uri: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=200&auto=format&fit=crop' }} 
           style={styles.objectImage}
@@ -90,7 +93,10 @@ export default function ProfileScreen() {
         </TouchableOpacity>
         <View style={styles.menuDivider} />
         
-        <TouchableOpacity style={styles.menuItem}>
+        <TouchableOpacity 
+          style={styles.menuItem}
+          onPress={() => router.push('/(tabs)/alerts')}
+        >
           <Bell size={20} color="#4B5563" style={styles.menuIcon} />
           <Text style={styles.menuItemText}>Notificações e Alertas</Text>
           <ChevronRight size={18} color="#9CA3AF" />
@@ -112,30 +118,31 @@ export default function ProfileScreen() {
       </View>
 
       {/* Logout */}
-      <Button style={styles.logoutCard} onPress={handleLogout} activeOpacity={0.8}>
+      <TouchableOpacity 
+        style={styles.logoutCard} 
+        onPress={handleLogout} 
+        activeOpacity={0.8}
+      >
         <LogOut size={20} color="#EF4444" style={styles.menuIcon} />
         <Text style={styles.logoutText}>Sair da conta</Text>
-      </Button>
+      </TouchableOpacity>
     </View>
-  );
-
-  const content = isWebLarge ? (
-    <View style={styles.webRowContainer}>
-      {leftColumn}
-      {rightColumn}
-    </View>
-  ) : (
-    <>
-      {leftColumn}
-      {rightColumn}
-    </>
   );
 
   if (isWebLarge) {
     return (
-      <View style={[styles.safeArea, styles.webRoot]}>
-        {content}
-      </View>
+      <ScrollView 
+        style={styles.webScrollView}
+        contentContainerStyle={styles.webScrollContainer} 
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.webContainer}>
+          <View style={styles.webRowContainer}>
+            {leftColumn}
+            {rightColumn}
+          </View>
+        </View>
+      </ScrollView>
     );
   }
 
@@ -143,7 +150,8 @@ export default function ProfileScreen() {
     <SafeAreaView style={styles.safeArea}>
       <StatusBar style="dark" />
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        {content}
+        {leftColumn}
+        {rightColumn}
       </ScrollView>
     </SafeAreaView>
   );

@@ -1,10 +1,10 @@
-import { 
-  useFonts,
+import {
   Figtree_400Regular,
   Figtree_500Medium,
   Figtree_600SemiBold,
   Figtree_700Bold,
-  Figtree_800ExtraBold
+  Figtree_800ExtraBold,
+  useFonts
 } from '@expo-google-fonts/figtree';
 import { DefaultTheme, Stack, ThemeProvider } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -13,7 +13,7 @@ import 'react-native-reanimated';
 
 export {
   // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
+  ErrorBoundary
 } from 'expo-router';
 
 export const unstable_settings = {
@@ -52,7 +52,7 @@ export default function RootLayout() {
   return <RootLayoutNav />;
 }
 
-import { View, StyleSheet, useWindowDimensions, Platform } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 function RootLayoutNav() {
   return (
@@ -62,7 +62,6 @@ function RootLayoutNav() {
           <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="details/[id]" options={{ presentation: 'modal', headerShown: false }} />
-          <Stack.Screen name="register" options={{ presentation: 'modal', headerShown: false }} />
         </Stack>
       </View>
     </ThemeProvider>

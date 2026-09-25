@@ -5,13 +5,27 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FAF9F5',
   },
-  webRoot: {
-    backgroundColor: 'transparent',
-  },
   scrollContent: {
     paddingHorizontal: 24,
     paddingTop: 32,
     paddingBottom: 40,
+  },
+  webScrollView: {
+    flex: 1,
+    backgroundColor: '#FAF9F5',
+  },
+  webScrollContainer: {
+    flexGrow: 1,
+    alignItems: 'center',
+    backgroundColor: '#FAF9F5',
+  },
+  webContainer: {
+    maxWidth: 1040,
+    width: '100%',
+    alignSelf: 'center',
+    paddingHorizontal: 32,
+    paddingTop: 36,
+    paddingBottom: 64,
   },
   webRowContainer: {
     flexDirection: 'row',
@@ -20,7 +34,7 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   webLeftCol: {
-    width: 400,
+    width: 360,
     flexShrink: 0,
     gap: 24,
   },
@@ -33,6 +47,9 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 1,
     borderColor: '#E5E7EB',
+    marginBottom: 0,
+  },
+  webStatsContainer: {
     marginBottom: 0,
   },
   profileHeader: {
