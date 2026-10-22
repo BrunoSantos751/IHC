@@ -14,7 +14,7 @@ export default function App() {
     // Mude o tempo (3000ms = 3 segundos) para a duração exata da sua animação
     const timer = setTimeout(async () => {
       setIsLoading(false); // Fecha a animação e abre o app
-    }, 3000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);
