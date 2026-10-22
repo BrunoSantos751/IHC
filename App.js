@@ -30,7 +30,7 @@ export default function App() {
     return (
       <View style={styles.container}>
         <Rive
-          resourceName={require("./assets/animations/sãolonguinho.riv")}
+          resourceName={require("./assets/animations/sãolonguinho_com_musica.riv")}
           stateMachineName="State Machine 1"
           style={styles.riveAnimation}
           autoplay={true}
