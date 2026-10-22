@@ -16,7 +16,7 @@ export default function ObjetoEncontrado({ onFinish }) {
   return (
     <View style={styles.container}>
       <Rive
-        resourceName={require("./assets/animations/objeto_encontrado.riv")}
+        resourceName={require("./assets/animations/objeto_encontrado_mus.riv")}
         stateMachineName="State Machine 1"
         autoplay={true}
         style={styles.animation}
