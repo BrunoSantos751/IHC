@@ -8,8 +8,10 @@ import {
 } from '@expo-google-fonts/figtree';
 import { DefaultTheme, Stack, ThemeProvider } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import 'react-native-reanimated';
+import SplashScreenRive from '../components/SplashScreenRive';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -22,9 +24,10 @@ export const unstable_settings = {
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+SplashScreen.preventAutoHideAsync().catch(() => {});
 
 export default function RootLayout() {
+  const [splashFinished, setSplashFinished] = useState(false);
   const [loaded, error] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     'Figtree-Regular': Figtree_400Regular,
@@ -39,20 +42,16 @@ export default function RootLayout() {
     if (error) throw error;
   }, [error]);
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
   if (!loaded) {
     return null;
   }
 
+  if (!splashFinished) {
+    return <SplashScreenRive onFinish={() => setSplashFinished(true)} />;
+  }
+
   return <RootLayoutNav />;
 }
-
-import { StyleSheet, View } from 'react-native';
 
 function RootLayoutNav() {
   return (

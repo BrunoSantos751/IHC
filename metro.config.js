@@ -4,6 +4,10 @@ const { getDefaultConfig } = require('expo/metro-config');
 /** @type {import('expo/metro-config').MetroConfig} */
 const config = getDefaultConfig(__dirname);
 
+if (!config.resolver.assetExts.includes('riv')) {
+  config.resolver.assetExts.push('riv');
+}
+
 config.resolver.resolveRequest = (context, moduleName, platform) => {
   if (platform === 'web') {
     if (moduleName.includes('src/private/specs_DEPRECATED/modules/NativeSourceCode')) {

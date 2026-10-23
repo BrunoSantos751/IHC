@@ -16,4 +16,21 @@ export const Colors = {
   
   white: '#FFFFFF',
   transparent: 'transparent',
+
+  light: {
+    text: '#1F2937',
+    background: '#FAF9F5',
+    tint: '#3D6DD7',
+    tabIconDefault: '#9CA3AF',
+    tabIconSelected: '#3D6DD7',
+  },
+  dark: {
+    text: '#FFFFFF',
+    background: '#0F172A',
+    tint: '#3D6DD7',
+    tabIconDefault: '#9CA3AF',
+    tabIconSelected: '#3D6DD7',
+  },
 };
+
+export default Colors;
